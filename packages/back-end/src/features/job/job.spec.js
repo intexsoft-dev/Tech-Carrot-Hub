@@ -31,6 +31,22 @@ describe(('JobController'), () => {
         },
       };
       jobController.deleteOne(req ,res);
-    })
+    });
+
+  it(`should return zero deleted records`,  async (done) => {
+    const req = { params: { id: null }};
+    const res = {
+      status: (status) => {
+        expect(status).toBe(200);
+        return {
+          json: (data) => {
+            expect(data).toEqual({ data: 0 });
+            done();
+          },
+        };
+      },
+    };
+    jobController.deleteOne(req ,res);
+  });
 
 });

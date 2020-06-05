@@ -1,14 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { ensureState } from 'redux-optimistic-ui'
+import { createOptimisticReducer, optimisticThunk } from "redux-optimistic-thunk";
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
-ensureState(rootReducer)
-
 const store = createStore(
-  rootReducer,
+  createOptimisticReducer(rootReducer),
   compose(
-    applyMiddleware(thunk),
+    applyMiddleware(thunk, optimisticThunk()),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
