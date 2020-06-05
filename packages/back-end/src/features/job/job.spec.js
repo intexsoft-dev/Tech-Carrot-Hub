@@ -34,13 +34,32 @@ describe(('JobController'), () => {
     });
 
   it(`should return zero deleted records`,  async (done) => {
-    const req = { params: { id: null }};
+    const req = { params: { id: 999 }};
     const res = {
       status: (status) => {
         expect(status).toBe(200);
         return {
           json: (data) => {
             expect(data).toEqual({ data: 0 });
+            done();
+          },
+        };
+      },
+    };
+    jobController.deleteOne(req ,res);
+  });
+
+  it(`should throw invalid input syntax error`,  async (done) => {
+    const id = Math.random();
+    const req = { params: { id }};
+    const res = {
+      status: (status) => {
+        expect(status).toBe(400);
+        return {
+          json: (data) => {
+            expect(data).toEqual({
+              message: `delete from "jobs" where "id" = $1 - invalid input syntax for type integer: "${id}"`
+            });
             done();
           },
         };
