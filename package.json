@@ -1,0 +1,22 @@
+{
+  "name": "tech-carrot-hub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "bootstrap": "lerna clean --yes && lerna bootstrap --concurrency 1",
+    "migration:run": "cd packages/back-end && npm run migration:run",
+    "start:be": "cd packages/back-end && npm run start",
+    "start:be:dev": "cd packages/back-end && npm run start:dev",
+    "start:fe": "cd packages/front-end && npm run start",
+    "test": "cd packages/back-end && npm run test"
+  },
+  "author": "MeleshkoDmitry",
+  "license": "ISC",
+  "devDependencies": {
+    "lerna": "^3.22.0"
+  },
+  "dependencies": {
+    "react-bootstrap": "^1.0.1"
+  }
+}
